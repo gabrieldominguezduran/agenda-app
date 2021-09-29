@@ -5,10 +5,5 @@ import { render } from "react-dom";
 import App from "../components/App";
 
 document.addEventListener("DOMContentLoaded", () => {
-  render(
-    <Router>
-      <Route path="/" component={App} />
-    </Router>,
-    document.body.appendChild(document.createElement("div"))
-  );
+  render(<App />, document.body.appendChild(document.createElement("div")));
 });

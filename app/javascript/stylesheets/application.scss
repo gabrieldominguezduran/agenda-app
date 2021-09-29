@@ -1,1 +1,39 @@
 @import "bootstrap";
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #f4f4f4;
+}
+
+.navbar {
+  background-color: #695ee8;
+}
+
+.container {
+  width: 80%;
+  margin: 2rem auto;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(28, 28, 29);
+  cursor: pointer;
+}
+
+.register {
+  width: 40%;
+}
+
+.btn-default {
+  background-color: #695ee8;
+  color: #f4f4f4;
+}

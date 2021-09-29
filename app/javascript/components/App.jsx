@@ -1,12 +1,32 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { ContactContext } from "./ContactContext";
 import Form from "./Form";
 import Home from "./Home";
 export default function App() {
+  const [contacts, setContacts] = useState([]);
+
+  useEffect(() => {
+    const url = "/load.json";
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        setContacts(data);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
-    <Switch>
-      <Route path="/create" component={Form} />
-      <Route path="/" component={Home} />
-    </Switch>
+    <Router>
+      <ContactContext.Provider value={{ contacts, setContacts }}>
+        <Route path="/" component={Home} />
+        <Route path="/create" component={Form} />
+      </ContactContext.Provider>
+    </Router>
   );
 }
