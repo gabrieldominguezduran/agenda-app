@@ -1,4 +1,11 @@
-<h1>Welcome to agenda app</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
 
-<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+<nav class="navbar navbar-light bg-danger">
+  <div class="container-fluid">
+    <h1 class="navbar-brand">Agenda App</h1>
+    <form class="d-flex">
+      <button class="btn btn-light" type="submit"><%= link_to 'Sign out', destroy_user_session_path, class: 'btn btn-light p-0', method: :delete %></button>
+    </form>
+  </div>
+</nav>
+<%= javascript_pack_tag 'Index' %>
+
