@@ -1,4 +1,4 @@
-## A basic app with built Rails and React, you can add, edit and delete contacts into your agenda
+## A basic app built with Rails and React, you can add, edit and delete contacts into your agenda
 
 ### Prerequisites
 
