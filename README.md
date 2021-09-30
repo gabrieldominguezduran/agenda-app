@@ -1,24 +1,68 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## A basic agenda app with built Rails and React, you can add, edit and delete contacts in your agenda
 
-Things you may want to cover:
+### Prerequisites
 
-* Ruby version
+The setups steps expect following tools installed on the system.
 
-* System dependencies
+- Github
+- Ruby [3.0.2](https://www.ruby-lang.org/en/news/2019/12/25/ruby-2-7-0-released/)
+- Rails [6.1.4.1](https://rubygems.org/gems/rails/versions/6.0.2)
 
-* Configuration
+#### This project is using webpacker for the React front-end
 
-* Database creation
+- [You can follow this instructions](https://edgeguides.rubyonrails.org/webpacker.html)
 
-* Database initialization
+#### 1. Clone the repository
 
-* How to run the test suite
+```bash
+git clone https://github.com/gabrieldominguezduran/agenda-app.git
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+#### Using GitHub CLI
 
-* Deployment instructions
+```bash
+gh repo clone gabrieldominguezduran/agenda-app
+```
 
-* ...
+#### 2. Install dependecies
+
+Run the following commands to install all dependecies
+
+```ruby
+bundle install
+```
+
+```javascript
+yarn install
+```
+
+#### 3. Set up database
+
+This app uses mysql2 gem if you want to set up a different db you can add the new gem to the Gemfile and run:
+
+```ruby
+rails db:system:change --to=postgresql
+rails db:system:change --to=sqlite3
+rails db:system:change --to=oracle
+rails db:system:change --to=frontbase
+rails db:system:change --to=sqlserver
+rails db:system:change --to=jdbc
+```
+
+Then run to set up the db:
+
+```ruby
+rails db:migrate
+```
+
+#### 3. Start the Rails server
+
+Start the rails server
+
+```ruby
+rails s
+```
+
+And now you can visit the site with the URL http://localhost:3000
