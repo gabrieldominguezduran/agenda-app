@@ -1,12 +1,9 @@
-# README
-
-## A basic agenda app with built Rails and React, you can add, edit and delete contacts in your agenda
+## A basic app with built Rails and React, you can add, edit and delete contacts into your agenda
 
 ### Prerequisites
 
 The setups steps expect following tools installed on the system.
 
-- Github
 - Ruby [3.0.2](https://www.ruby-lang.org/en/news/2019/12/25/ruby-2-7-0-released/)
 - Rails [6.1.4.1](https://rubygems.org/gems/rails/versions/6.0.2)
 
@@ -51,15 +48,13 @@ rails db:system:change --to=sqlserver
 rails db:system:change --to=jdbc
 ```
 
-Then run to set up the db:
+Then run the migrations to set up the db:
 
 ```ruby
 rails db:migrate
 ```
 
 #### 3. Start the Rails server
-
-Start the rails server
 
 ```ruby
 rails s
