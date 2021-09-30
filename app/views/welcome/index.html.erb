@@ -1,7 +1,7 @@
 
 <div class="container">
   <nav class="navbar navbar-light">
-    <h1 class="navbar-brand mx-2 display-5 text-light">Welcome <%= current_user.name.capitalize %>!</h1>
+    <h1 class="navbar-brand mx-2 display-5 text-light">Welcome <%= current_user.username.capitalize %>!</h1>
     <form class="d-flex">
       <button class="btn btn-light mx-2 p-1" type="submit"><%= link_to 'Sign out', destroy_user_session_path, class: 'btn btn-light p-0', method: :delete %></button>
     </form>

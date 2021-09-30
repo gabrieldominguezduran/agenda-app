@@ -24,7 +24,7 @@ export default function App() {
   return (
     <Router>
       <ContactContext.Provider value={{ contacts, setContacts }}>
-        <Route path="/" component={Home} />
+        <Route exact path="/" component={Home} />
         <Route path="/create" component={Form} />
       </ContactContext.Provider>
     </Router>

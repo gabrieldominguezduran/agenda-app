@@ -17,9 +17,9 @@ Rails.application.routes.draw do
 
   get '/load' => 'contacts#load'
   post '/create' => 'contacts#create'
-  post '/update' => 'contacts#update'
+  post '/update/:id' => 'contacts#update'
   get '/checkEmail' => 'contacts#check_email'
-  delete '/delete' => 'contacts#delete'
+  delete '/delete/:id' => 'contacts#delete'
 
    # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

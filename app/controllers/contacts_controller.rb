@@ -1,29 +1,36 @@
 class ContactsController < ApplicationController
   skip_forgery_protection 
   def load
-    contacts = Contact.order(created_at: :desc)
+    contacts = Contact.order(:first_name)
 
-    render json: contacts
+    render json: contacts.to_json(:include => [edits: {include: :user}])
   end
 
   def create
     Contact.create(contact_params)
-    contacts = Contact.order(created_at: :desc)
-    render json: contacts
+
+    contacts = Contact.order(:first_name)
+    render json: contacts.to_json(:include => [edits: {include: :user}])
   end
 
   def update
     contact = Contact.find(params[:id])
+    contact.update!(contact_params)
 
-    contact.update_attributes(contact_params)
+    Edit.create({
+      :user_id => current_user.id,
+      :contact_id => contact.id
+    })
 
-    render json: contact
+    contacts = Contact.order(:first_name)
+    render json: contacts.to_json(:include => [edits: {include: :user}])
   end
 
   def delete
-    Contact.destory(params[:id])
+    Contact.destroy(params[:id])
 
-    head :no_content
+    contacts = Contact.order(:first_name)
+    render json:contacts.to_json(:include => [edits: {include: :user}])
   end
 
   def check_email

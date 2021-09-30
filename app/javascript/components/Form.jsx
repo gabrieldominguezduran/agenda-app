@@ -24,14 +24,38 @@ export default function Form() {
     });
   };
 
+  const fetchEmailData = async () => {
+    try {
+      const response = await fetch(`/checkEmail?email=${contact.email}`);
+      const res = await response.json();
+      setEmailUniq(res);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   const checkEmail = () => {
     const emailRegEx =
       /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
 
     if (emailRegEx.test(contact.email)) {
-      fetch(`/checkEmail?email=${contact.email}`)
-        .then((response) => response.json())
-        .then((res) => setEmailUniq(res));
+      fetchEmailData();
+    }
+  };
+
+  const createNewContact = async () => {
+    const data = { contact };
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+    try {
+      const response = await fetch("/create", requestOptions);
+      const res = await response.json();
+      setContacts(res);
+    } catch (error) {
+      console.log("error", error);
     }
   };
 
@@ -39,21 +63,12 @@ export default function Form() {
     e.preventDefault();
     if (
       contact.first_name.replace(/\s+/g, "").length > 2 &&
-      contact.last_name.replace(/\s+/g, "").length > 2 &&
+      contact.last_name.replace(/\s+/g, "").length > 1 &&
       !emailUniq &&
       contact.phone_number.replace(/\s+/g, "").length > 3
     ) {
+      createNewContact();
       setNotValid(false);
-      const data = { contact };
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      };
-      fetch("/create", requestOptions)
-        .then((response) => response.json())
-        .then((res) => setContacts(res));
-
       setContact({
         first_name: "",
         last_name: "",
@@ -67,17 +82,21 @@ export default function Form() {
   };
   return (
     <div className="container">
-      {notValid ? (
-        <p className="display-5 text-danger">Please complete all the fields</p>
-      ) : null}
-      {emailUniq ? (
-        <p className="display-5 text-danger">Email already exists</p>
-      ) : null}
-      <div className="d-flex justify-content-end my-2">
+      <div className="d-flex justify-content-start my-2">
         <Link to="/" className="btn btn-default">
-          Home
+          <i className="bi bi-arrow-left-circle-fill"></i>
         </Link>
       </div>
+      {notValid ? (
+        <p className="display-5 text-danger text-center">
+          Please complete all the fields
+        </p>
+      ) : null}
+      {emailUniq ? (
+        <p className="display-5 text-danger text-center">
+          Email already exists
+        </p>
+      ) : null}
       <form action="post" className="row g-3">
         <div className="col-md-6">
           <label htmlFor="first_name" className="form-label">
