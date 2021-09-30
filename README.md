@@ -60,4 +60,4 @@ rails db:migrate
 rails s
 ```
 
-And now you can visit the site with the URL http://localhost:3000
+And now you can visit: http://localhost:3000
