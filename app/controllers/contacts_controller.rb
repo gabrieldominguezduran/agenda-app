@@ -15,12 +15,15 @@ class ContactsController < ApplicationController
 
   def update
     contact = Contact.find(params[:id])
-    contact.update!(contact_params)
 
-    Edit.create({
-      :user_id => current_user.id,
-      :contact_id => contact.id
-    })
+      AtiveRecord::Base.transaction do 
+        contact.update!(contact_params)
+
+        Edit.create({
+          :user_id => current_user.id,
+          :contact_id => contact.id
+        })
+      end
 
     contacts = Contact.order(:first_name)
     render json: contacts.to_json(:include => [edits: {include: :user}])
