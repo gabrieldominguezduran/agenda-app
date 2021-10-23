@@ -16,7 +16,7 @@ class ContactsController < ApplicationController
   def update
     contact = Contact.find(params[:id])
 
-      AtiveRecord::Base.transaction do 
+      ActiveRecord::Base.transaction do 
         contact.update!(contact_params)
 
         Edit.create({
